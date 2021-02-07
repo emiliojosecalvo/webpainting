@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="painting.css">
+  <script type="text/javascript" src="paper-full.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>Paint Multicolor</title>
+
+  <script type="text/paperscript" canvas="myCanvas">
+
+
+        tool.minDistance = 10;
+        tool.maxDistance = 45;
+
+        var path;
+
+        function onMouseDown(event) {
+            path = new Path();
+            path.fillColor = {
+                hue: Math.random() * 360,
+                saturation: 1,
+                brightness: 1
+            };
+
+            path.add(event.point);
+        }
+
+        function onMouseDrag(event) {
+            var step = event.delta / 2;
+            step.angle += 90;
+            
+            var top = event.middlePoint + step;
+            var bottom = event.middlePoint - step;
+            
+            path.add(top);
+            path.insert(0, bottom);
+            path.smooth();
+        }
+
+        function onMouseUp(event) {
+            path.add(event.point);
+            path.closed = true;
+            path.smooth();
+}
+        
+
+
+
+    </script>
+
+</head>
+
+<body>
+  <!-- MAIN MENU -->
+
+  <ul class="list-inline text-light text-center pt-1 bg-dark fixed-top">
+    <li class="list-inline-item"><a href="index.html">Reset</a></li>
+    <li class="list-inline-item">
+      <p>Paint Multicolor Game !</p>
+    </li>
+    <li class="list-inline-item">
+      <p class="light">This Website was made by Emilio Calvo to contact click <a
+          href="https://emiliojosecalvo.github.io/portfolio/">Here</a></p>
+    </li>
+  </ul>
+
+  <!-- END MAIN MENU -->
+  <canvas id="myCanvas" resize></canvas>
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
